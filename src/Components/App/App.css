@@ -1,5 +1,12 @@
 .app {
-  background-color: black;
+  background-color: rgb(39, 40, 49);
   height: 100vh;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainArea {
+  border: 2px solid white;
 }

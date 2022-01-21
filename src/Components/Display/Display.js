@@ -4,10 +4,12 @@ import './Display.css';
 class Display extends React.Component {
 
     render(){
-        const display = this.props.value;
+        let display = parseFloat(this.props.value);
+        let operationKey = this.props.operationKey;
         return(
             <div className='display'>
-                <p>{display} </p>
+                <p>{operationKey}</p>
+                <p>{display.toLocaleString("en-US")} </p>
             </div>
         );
     }

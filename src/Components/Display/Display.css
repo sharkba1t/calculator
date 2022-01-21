@@ -4,11 +4,14 @@
     background-color: rgb(36, 34, 34);
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+    overflow: hidden;
+    
 } 
 
 p {
-    padding: 10px;
+    padding: 15px;
     font-size: 2em;
     color: white;
+    float: right;
 }

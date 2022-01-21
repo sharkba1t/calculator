@@ -37,7 +37,8 @@ class App extends React.Component {
       inputDisplay = 0;
       allInputs = []
       this.setState({
-        operation: ''
+        operation: '',
+        isDecimal: false
       })
     } else if (operations.findIndex(element => element === number) > -1) {
        if (this.state.isOperation && number !== '='){
@@ -48,10 +49,17 @@ class App extends React.Component {
         allInputs.push(inputDisplay);
         allInputs.push(number);
         this.setState({
+          isDecimal: false,
           isOperation: true
         })
       }
-    } else if (this.state.currentInput === 0 || this.state.isOperation) {
+    } else if (number === '.'){
+      if (!this.state.isDecimal) {
+        inputDisplay += number
+        this.setState({
+          isDecimal: true
+        })
+    }} else if (this.state.currentInput === 0 || this.state.isOperation) {
       inputDisplay = number;
       this.setState({
         isOperation: false
@@ -66,6 +74,7 @@ class App extends React.Component {
         input: allInputs
       })
   }
+
 
   operationDisplay(index) {
     if (operations[index] !== '='){

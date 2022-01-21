@@ -3,6 +3,7 @@ import './App.css';
 import Display from '../Display/Display';
 import Keypad from '../Keypad/Keypad';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -11,24 +12,37 @@ class App extends React.Component {
       input: []
     }
     this.changeCurrentInput = this.changeCurrentInput.bind(this);
-    this.changeDisplay = this.changeDisplay.bind(this);
+    this.mathOperation = this.mathOperation.bind(this);
   }
 
   changeCurrentInput(number) {
-    this.setState({
-      currentInput: number
-    })
+    let inputDisplay = this.state.currentInput;
+    if (number === "c"){
+      inputDisplay = '0';
+    }  else if (this.state.currentInput === '0') {
+      inputDisplay = number;
+
+    }
+    else {
+    inputDisplay += number;
+    }
+    this.setState(
+      {
+        currentInput: inputDisplay
+      })
   }
 
-  changeDisplay() {
-    return '0'
+  mathOperation() {
+    
   }
 
   render(){
     return (
       <div className='app'>
-        <Display value= {this.state.currentInput} />
-         <Keypad onClick={this.changeCurrentInput}/>
+        <div className='mainArea'>
+          <Display value= {this.state.currentInput} />
+          <Keypad onClick={this.changeCurrentInput} />
+         </div>
       </div>
     )
   }

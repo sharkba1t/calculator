@@ -11,13 +11,14 @@ class Button extends React.Component {
     }
 
     handleInput() {
-        const name = this.props.value;
-        this.props.onClick(name);
+        const number = this.props.value;
+        this.props.onClick(number);
       }
 
     render(){
         return (
-            <button type='button' id={this.props.id} className={this.props.className} onClick={this.handleInput}
+            <button type='button' className={this.props.className} 
+            onClick={this.handleInput}
             value={this.props.value}
             >{this.props.value}</button>
         );

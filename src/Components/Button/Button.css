@@ -3,6 +3,7 @@ button {
     width: 95%;
     height: 95%;
     background-color: white;
+    font-size: larger;
 }
 
 button:hover {

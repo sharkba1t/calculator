@@ -9,7 +9,7 @@
     justify-content: center;
 } 
 
-#zero {
+.zero {
     grid-area:  5 / 1 / span 1 / span 2;
     width: 98%;
 }

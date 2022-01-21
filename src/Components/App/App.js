@@ -7,10 +7,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentInput: 0,
+      currentInput: '0',
       input: []
     }
     this.changeCurrentInput = this.changeCurrentInput.bind(this);
+    this.changeDisplay = this.changeDisplay.bind(this);
   }
 
   changeCurrentInput(number) {
@@ -19,11 +20,15 @@ class App extends React.Component {
     })
   }
 
+  changeDisplay() {
+    return '0'
+  }
+
   render(){
     return (
       <div className='app'>
         <Display value= {this.state.currentInput} />
-         <Keypad/>
+         <Keypad onClick={this.changeCurrentInput}/>
       </div>
     )
   }

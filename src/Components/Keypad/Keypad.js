@@ -3,9 +3,38 @@ import Button from '../Button/Button';
 import './Keypad.css';
 
 class Keypad extends React.Component {
+    constructor(props){
+        super(props);
+        this.handleInput = this.handleInput.bind(this);
+    }
+    handleInput(numberInput){
+      let number = numberInput;
+      this.props.onClick(number);
+    }
+
     render(){
         return(
-            <div></div>
+            <div className='keypad'>
+                <Button value='C'/>
+                <Button value='±'/>
+                <Button value='%'/>
+                <Button value='/'/>
+                <Button value='7' onClick={this.handleInput}/>
+                <Button value='8' onClick={this.handleInput}/>
+                <Button value='9' onClick={this.handleInput}/>
+                <Button value='*' onClick={this.handleInput}/>
+                <Button value='4' onClick={this.handleInput}/>
+                <Button value='5' onClick={this.handleInput}/>
+                <Button value='6' onClick={this.handleInput}/>
+                <Button value='-' onClick={this.handleInput}/>
+                <Button value='1' onClick={this.handleInput}/>
+                <Button value='2' onClick={this.handleInput}/>
+                <Button value='3' onClick={this.handleInput}/>
+                <Button value='+' onClick={this.handleInput}/>
+                <Button className='zero' value='0' onClick={this.handleInput}/>
+                <Button value='.'/>
+                <Button value='='/>
+            </div>
         );
     }
 }

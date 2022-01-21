@@ -1,0 +1,5 @@
+.display {
+    width: 20em;
+    height: 5em;
+    background: linear-gradient(90deg, red, blue);
+} 

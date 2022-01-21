@@ -1,0 +1,15 @@
+.keypad {
+    display: grid;
+    width: 20em;
+    grid-template-rows: repeat(5, 5em);
+    grid-template-columns: repeat(4, 5em);
+    background-color: violet;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+} 
+
+#zero {
+    grid-area:  5 / 1 / span 1 / span 2;
+    width: 98%;
+}

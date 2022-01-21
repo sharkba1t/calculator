@@ -1,5 +1,14 @@
 .display {
-    width: 20em;
+    max-width: 20em;
     height: 5em;
-    background: linear-gradient(90deg, red, blue);
+    background-color: rgb(36, 34, 34);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 } 
+
+p {
+    padding: 10px;
+    font-size: 2em;
+    color: white;
+}

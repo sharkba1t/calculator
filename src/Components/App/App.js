@@ -4,13 +4,13 @@ import Display from '../Display/Display';
 import Keypad from '../Keypad/Keypad';
 
 const operationKey = {
-  "=": 6,
-  "+": 1,
-  "-": 2,
-  "*": 3,
-  "/": 4,
-  "%": 5,
-  '±': 7,
+  "=": () => {},
+  "+": function(first, second) {return first + second},
+  "-": function(first, second) {return first + second},
+  "*": function(first, second) {return first + second},
+  "/": function(first, second) {return first + second},
+  "%": function(number) {return number / 100},
+  '±': function(number) {return -number},
 }
 
 const operations = Object.keys(operationKey)
@@ -30,42 +30,40 @@ class App extends React.Component {
     this.operationDisplay = this.operationDisplay.bind(this);
   }
 
-  changeCurrentInput(number) {
+  changeCurrentInput(input) {
     let inputDisplay = this.state.currentInput;
     let allInputs = this.state.input;
-    if (number === "C"){
+    if (input === "C"){
       inputDisplay = 0;
       allInputs = []
       this.setState({
         operation: '',
         isDecimal: false
       })
-    } else if (operations.findIndex(element => element === number) > -1) {
-       if (this.state.isOperation && number !== '='){
-        allInputs[allInputs.length - 1] = number
+    } else if (operations.findIndex(element => element === input) > -1) {
+       if (this.state.isOperation && input !== '='){
+        allInputs[allInputs.length - 1] = input
         console.log(allInputs)
        } else {
-        this.operationDisplay(operations.findIndex(element => element === number));
         allInputs.push(inputDisplay);
-        allInputs.push(number);
-        this.setState({
-          isDecimal: false,
-          isOperation: true
-        })
+        if (['+','-','*', '/'].indexOf(input) === -1) {
+          this.setState({isDecimal: false, isOperation: true})
+        }
+        inputDisplay = this.operationDisplay(input);
       }
-    } else if (number === '.'){
+    } else if (input === '.'){
       if (!this.state.isDecimal) {
-        inputDisplay += number
+        inputDisplay += input
         this.setState({
           isDecimal: true
         })
     }} else if (this.state.currentInput === 0 || this.state.isOperation) {
-      inputDisplay = number;
+      inputDisplay = input;
       this.setState({
         isOperation: false
       })
     } else {
-        inputDisplay += number;
+        inputDisplay += input;
     }
     console.log(allInputs)
     this.setState(
@@ -76,16 +74,20 @@ class App extends React.Component {
   }
 
 
-  operationDisplay(index) {
-    if (operations[index] !== '='){
+  operationDisplay(input) {
+    let newNumber;
+    if (['=','%','±'].indexOf(input) === -1){
     this.setState({
-      operation: operations[index]
+      operation: input
     }) 
   } else {
+    newNumber = operationKey[input](this.state.currentInput)
+    console.log(newNumber)
     this.setState({
       operation: ''
     }) 
   }
+  return newNumber
   }
 
   render(){

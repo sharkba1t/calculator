@@ -6,27 +6,19 @@ class Keypad extends React.Component {
     constructor(props){
         super(props);
         this.handleInput = this.handleInput.bind(this);
-        this.clearDisplay = this.clearDisplay.bind(this)
     }
     handleInput(number){
-    if (number === 'c'){
-        this.clearDisplay()
-    } else {
       this.props.onClick(number);
     }
-    }
 
-    clearDisplay() {
-        this.props.onClick('c');
-    }
 
     render(){
         return(
             <div className='keypad'>
-                <Button value='C' onClick={this.clearDisplay}/>
-                <Button value='±'/>
-                <Button value='%'/>
-                <Button value='/'/>
+                <Button value='C' onClick={this.handleInput}/>
+                <Button value='±' onClick={this.handleInput}/>
+                <Button value='%' onClick={this.handleInput}/>
+                <Button value='/' onClick={this.handleInput}/>
                 <Button value='7' onClick={this.handleInput}/>
                 <Button value='8' onClick={this.handleInput}/>
                 <Button value='9' onClick={this.handleInput}/>
@@ -40,8 +32,8 @@ class Keypad extends React.Component {
                 <Button value='3' onClick={this.handleInput}/>
                 <Button value='+' onClick={this.handleInput}/>
                 <Button className='zero' value='0' onClick={this.handleInput}/>
-                <Button value='.'/>
-                <Button value='='/>
+                <Button value='.' onClick={this.handleInput}/>
+                <Button value='=' onClick={this.handleInput}/>
             </div>
         );
     }

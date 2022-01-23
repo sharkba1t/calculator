@@ -4,7 +4,7 @@ import Display from '../Display/Display';
 import Keypad from '../Keypad/Keypad';
 
 const operationKey = {
-  "=": (first, second, operation) => {return this[operation](first, second)},
+  "=": 0,
   "+": function(first, second) {return first + second},
   "-": function(first, second) {return first - second},
   "*": function(first, second) {return first * second},
@@ -25,7 +25,8 @@ class App extends React.Component {
       operation: '',
       isDecimal: false,
       isFirstNumber: true,
-      isPreviousInput: false
+      isPreviousInput: false,
+      isEqualPressed: false,
     }
     this.changeCurrentInput = this.changeCurrentInput.bind(this);
     this.operationDisplay = this.operationDisplay.bind(this);
@@ -39,23 +40,24 @@ class App extends React.Component {
     if (input === "C"){
       inputDisplay = 0;
       allInputs = []
-      this.resetDisplay()
+       return this.resetDisplay();
     } else if (operations.findIndex(element => element === input) > -1) {
         this.setState({currentInput: inputDisplay})
         if (!this.state.isPreviousInput) {
           previousInput = this.state.currentInput;
-          console.log('this happened.')
           this.setState({
             previousInput: previousInput,
             currentInput: inputDisplay
           })
         }
-        allInputs.push(inputDisplay); 
+        if (!this.state.isEqualPressed){
+          allInputs.push(inputDisplay);
+        }
         if (['+','-','*', '/'].indexOf(input) !== -1) {
-          this.setState({isDecimal: false, isPreviousInput: true})
+          this.setState({isDecimal: false, isPreviousInput: true, isEqualPressed: false})
           allInputs.push(input);
         } 
-        inputDisplay = this.operationDisplay(input) || inputDisplay;
+        inputDisplay = isNaN(this.operationDisplay(input)) ? inputDisplay : this.operationDisplay(input);
       }
       else if (input === '.'){
       if (!this.state.isDecimal) {
@@ -78,7 +80,6 @@ class App extends React.Component {
             input: allInputs
           })
     }
-    console.log(allInputs)
     this.setState(
       {
         currentInput: inputDisplay,
@@ -90,9 +91,11 @@ class App extends React.Component {
       operation: '',
       currentInput: 0,
       previousInput: 0,
+      input: [],
       isDecimal: false,
       isPreviousInput: false,
-      isFirstNumber: true
+      isFirstNumber: true,
+      isEqualPressed: false,
     })
   }
 
@@ -102,18 +105,26 @@ class App extends React.Component {
     let second = parseFloat(this.state.currentInput);
     let inputs = this.state.input
     if (input === '='){
-      console.log(inputs)
-      newNumber = operationKey[inputs[1]](parseFloat(inputs[0]),parseFloat(inputs[2]))
-      this.setState({input: [newNumber] })
-      return newNumber
+      if (inputs.length >= 2){
+      newNumber = operationKey[inputs[1]](parseFloat(inputs[0]), parseFloat(inputs[2]))
+      this.setState({
+        input: [parseFloat(newNumber)],
+        operation: '',
+        previousInput: newNumber,
+        isPreviousInput: false,
+        isEqualPressed: true,
+      })
+      return newNumber }
     } else if (['=','%','±'].indexOf(input) === -1){
       if (!this.state.isPreviousInput){
         newNumber = this.state.currentInput;
     this.setState({
+      previousInput: newNumber,
       operation: input,
       currentInput: 0,
       isFirstNumber: true,
-      isPreviousInput: true
+      isPreviousInput: true,
+      isEqualPressed: false,
     }) 
   } else {
       newNumber = operationKey[input](first, second);

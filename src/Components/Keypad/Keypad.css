@@ -1,15 +1,23 @@
 .keypad {
     display: grid;
-    width: 20em;
-    grid-template-rows: repeat(5, 5em);
-    grid-template-columns: repeat(4, 5em);
-    background-color: violet;
+    width: 16em;
+    grid-template-rows: repeat(5, 4em);
+    grid-template-columns: repeat(4, 4em);
+    background-color: rgb(255, 208, 146);
     justify-items: center;
     align-items: center;
     justify-content: center;
 } 
 
-.zero {
+#zero {
     grid-area:  5 / 1 / span 1 / span 2;
     width: 98%;
+}
+
+.function {
+    background-color: tomato;
+}
+
+.operation {
+    background-color: skyblue;
 }

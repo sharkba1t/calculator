@@ -1,5 +1,5 @@
 .display {
-    max-width: 20em;
+    max-width: 16em;
     height: 5em;
     background-color: rgb(36, 34, 34);
     display: flex;
@@ -10,8 +10,9 @@
 } 
 
 p {
+    overflow: hidden;
     padding: 15px;
     font-size: 2em;
-    color: white;
+    color: whitesmoke;
     float: right;
 }

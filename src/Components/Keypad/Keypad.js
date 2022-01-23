@@ -15,25 +15,25 @@ class Keypad extends React.Component {
     render(){
         return(
             <div className='keypad'>
-                <Button value='C' onClick={this.handleInput}/>
-                <Button value='±' onClick={this.handleInput}/>
-                <Button value='%' onClick={this.handleInput}/>
-                <Button value='/' onClick={this.handleInput}/>
+                <Button value='C' className='function' onClick={this.handleInput}/>
+                <Button value='±' className='function' onClick={this.handleInput}/>
+                <Button value='%' className='function' onClick={this.handleInput}/>
+                <Button value='/' className='operation' onClick={this.handleInput}/>
                 <Button value='7' onClick={this.handleInput}/>
                 <Button value='8' onClick={this.handleInput}/>
                 <Button value='9' onClick={this.handleInput}/>
-                <Button value='*' onClick={this.handleInput}/>
+                <Button value='*' className='operation' onClick={this.handleInput}/>
                 <Button value='4' onClick={this.handleInput}/>
                 <Button value='5' onClick={this.handleInput}/>
                 <Button value='6' onClick={this.handleInput}/>
-                <Button value='-' onClick={this.handleInput}/>
+                <Button value='-' className='operation' onClick={this.handleInput}/>
                 <Button value='1' onClick={this.handleInput}/>
                 <Button value='2' onClick={this.handleInput}/>
                 <Button value='3' onClick={this.handleInput}/>
-                <Button value='+' onClick={this.handleInput}/>
-                <Button className='zero' value='0' onClick={this.handleInput}/>
+                <Button value='+' className='operation' onClick={this.handleInput}/>
+                <Button id='zero' value='0' onClick={this.handleInput}/>
                 <Button value='.' onClick={this.handleInput}/>
-                <Button value='=' onClick={this.handleInput}/>
+                <Button value='=' className='operation' onClick={this.handleInput}/>
             </div>
         );
     }

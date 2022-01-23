@@ -159,7 +159,7 @@ class App extends React.Component {
   dividedByZero() {
      let inputs = this.state.input
      this.setState({operation: ''})
-     return inputs[2] == 0 && inputs[1] === '/';
+     return inputs[2] === '0' && inputs[1] === '/';
   }
 
   render(){

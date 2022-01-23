@@ -31,16 +31,20 @@ class App extends React.Component {
     this.changeCurrentInput = this.changeCurrentInput.bind(this);
     this.operationDisplay = this.operationDisplay.bind(this);
     this.resetDisplay = this.resetDisplay.bind(this);
+    this.dividedByZero = this.dividedByZero.bind(this);
   }
 
   changeCurrentInput(input) {
     let inputDisplay = this.state.currentInput;
     let allInputs = this.state.input;
     let previousInput;
+    
     if (input === "C"){
       inputDisplay = 0;
       allInputs = []
        return this.resetDisplay();
+    } else if (inputDisplay === 'Error') {
+      return inputDisplay;
     } else if (operations.findIndex(element => element === input) > -1) {
         this.setState({currentInput: inputDisplay})
         if (!this.state.isPreviousInput) {
@@ -57,7 +61,10 @@ class App extends React.Component {
           this.setState({isDecimal: false, isPreviousInput: true, isEqualPressed: false})
           allInputs.push(input);
         } 
-        inputDisplay = isNaN(this.operationDisplay(input)) ? inputDisplay : this.operationDisplay(input);
+        if (this.dividedByZero()){
+          inputDisplay = "Error";
+        } else {
+        inputDisplay = isNaN(this.operationDisplay(input)) ? inputDisplay : this.operationDisplay(input); }
       }
       else if (input === '.'){
       if (!this.state.isDecimal) {
@@ -105,6 +112,9 @@ class App extends React.Component {
     let second = parseFloat(this.state.currentInput);
     let inputs = this.state.input
     if (input === '='){
+      if (this.dividedByZero()){
+        return "Error"
+      }
       if (inputs.length >= 2){
       newNumber = operationKey[inputs[1]](parseFloat(inputs[0]), parseFloat(inputs[2]))
       this.setState({
@@ -116,6 +126,9 @@ class App extends React.Component {
       })
       return newNumber }
     } else if (['=','%','±'].indexOf(input) === -1){
+      if (this.dividedByZero()){
+        return "Error"
+      }
       if (!this.state.isPreviousInput){
         newNumber = this.state.currentInput;
     this.setState({
@@ -141,6 +154,12 @@ class App extends React.Component {
     newNumber = operationKey[input](this.state.currentInput)
     return newNumber
   }
+  }
+
+  dividedByZero() {
+     let inputs = this.state.input
+     this.setState({operation: ''})
+     return inputs[2] == 0 && inputs[1] === '/';
   }
 
   render(){

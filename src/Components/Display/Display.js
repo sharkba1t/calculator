@@ -4,7 +4,7 @@ import './Display.css';
 class Display extends React.Component {
 
     render(){
-        let display = parseFloat(this.props.value);
+        let display = this.props.value;
         let operationKey = this.props.operationKey;
         return(
             <div className='display'>
